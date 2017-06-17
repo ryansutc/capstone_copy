@@ -10,6 +10,13 @@ This is an independent copy of the NSCC Schedule Project Repository for archivin
 
 This version is slightly updated for optimal displaying here: nsccsucks.xyz
 
+## Initial Setup and Configuration
+
+1. Copy/Fork Repository to a development machine with MySQL, PHP 5+, Composer, Node and NPM
+2. In NsccRoomApp_res folder, Run `Composer Install` to get required PHP Packages, and `NPM Install` to get JS Packages
+3. In 
+
+
 ## Credits
 
 Ryan Sutcliffe, Michael Sturdy, Nick Bourque

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.css' rel='stylesheet' />
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+		margin-left: 1px;
+		font-family: "arial";
+		background-color: #CCCCCC
+		}
+        
+		#mainframe {height: auto;
+		/*border: 1px dashed #f00;*/
+		margin: auto;
+		/*margin-left: 5%; 
+		margin-right: 5%; */
+		padding-left: 0px; 
+		padding-right: 0px;
+		width: 95%;
+		max-width: 1000px;
+		min-width: 600px;
+		background-color: #f2f2f2;
+		font-size: 11pt; 
+		text-align: justify;
+		/*border rounding */
+		-moz-border-radius: 15px;
+		-webkit-border-radius: 15px;
+		border-radius: 15px;
+				}
+    </style>
+</head>
+<body>
+
+<style>
+    #menu {
+        background: #fff;
+        position: absolute;
+        z-index: 1;
+        top: 10px;
+        right: 10px;
+        border-radius: 3px;
+        width: 120px;
+        border: 1px solid rgba(0,0,0,0.4);
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    #menu a {
+        font-size: 13px;
+        color: #404040;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0,0,0,0.25);
+        text-align: center;
+    }
+
+    #menu a:last-child {
+        border: none;
+    }
+
+    #menu a:hover {
+        background-color: #f8f8f8;
+        color: #404040;
+    }
+
+    #menu a.active {
+        background-color: #3887be;
+        color: #ffffff;
+    }
+
+    #menu a.active:hover {
+        background: #3074a4;
+    }
+</style>
+
+<div id="mainframe">
+	<div id="map" style='width: 600px; height: 400px;'>
+		<nav id="menu"></nav>
+	</div>
+	<div>
+		<p>Find Room</p>
+		<form action="" onsubmit='return alert("woah hold on there cowboy")'>
+			<select name="cars">
+				<option value="AKE">AKE</option>
+				<option value="WAT">WAT</option>
+				<option value="AVA">AVA</option>
+				<option value="BUR">BUR</option>
+				<option value="DIG">DIG</option>
+				<option value="AMH">AMH</option>
+				<option value="CUM">CUM</option>
+				<option value="ITC">ITC</option>
+				<option value="KIN">KIN</option>
+				<option value="LUN">LUN</option>
+				<option value="MAR">MAR</option>
+				<option value="PIC">PIC</option>
+				<option value="SHE">SHE</option>
+				<option value="STR">STR</option>
+				<option value="WAG">WAG</option>
+				<option value="TRM">TRM</option>
+				<option value="TRF">TRF</option>
+				<option value="TRS">TRS</option>
+				<option value="TRU">TRU</option>
+				<option value="TRG">TRG</option>
+			</select>
+			<br><br>
+			<input type="submit">
+		</form>
+	</div>	
+</div>
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoicnlhbnN1dGMiLCJhIjoiY2l5MGhpZHBpMDA3eTJxbzl1cjI2aTNuZCJ9.vdbwWHcBIJmFQ383dVstXg';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v9',
+    zoom: 17,
+    center: [-63.614, 44.6696]
+});
+
+map.on('load', function () {
+	
+	map.addSource('Campuses', {
+        type: 'vector',
+        url: 'mapbox://ryansutc.bokyiufq'
+    });
+
+   map.addSource('ITCampus_f3', {
+        type: 'vector',
+        url: 'mapbox://ryansutc.74v4z534'
+    });
+	 
+	map.addSource('ITCampus_f2', {
+        type: 'vector',
+        url: 'mapbox://ryansutc.87s8r2jj'
+    });
+	 
+	 map.addSource('ITCampus_f1', {
+        type: 'vector',
+        url: 'mapbox://ryansutc.be3w2hls'
+    });
+
+	
+	map.addLayer({
+        'id': 'Campuses',
+        'type': 'circle',
+        'source': 'Campuses',
+        'layout': {
+            'visibility': 'visible'
+        },
+        
+        'source-layer': 'Campuses-2hqb70'
+    });
+	
+    map.addLayer({
+        'id': 'ITCampus_f3_Selection',
+        'type': 'fill',
+        'source': 'ITCampus_f3',
+        'layout': {
+            'visibility': 'none'
+        },
+        'paint': {
+			'fill-outline-color': 'rgba(54,0,0,2.5)',
+            'fill-color': 'rgba(255,0,0,0.55)'
+        },
+        'source-layer': 'Floor3-abu27v'
+    });
+	
+	map.addLayer({
+        'id': 'ITCampus_f3_All',
+        'type': 'fill',
+        'source': 'ITCampus_f3',
+        'layout': {
+            'visibility': 'visible'
+        },
+        'paint': {
+			'fill-outline-color': 'rgba(40,40,40,1)',
+            'fill-color': 'rgba(80,80,80,0.2)'
+        },
+        'source-layer': 'Floor3-abu27v'
+    });
+	 
+	 map.addLayer({
+        'id': 'ITCampus_f2_Selection',
+        'type': 'fill',
+        'source': 'ITCampus_f2',
+        'layout': {
+            'visibility': 'none'
+        },
+        'paint': {
+			'fill-outline-color': 'rgba(54,0,0,2.5)',
+            'fill-color': 'rgba(255,0,0,0.55)'
+        },
+        'source-layer': 'Floor2-4f0e42'
+    });
+	
+	map.addLayer({
+        'id': 'ITCampus_f2_All',
+        'type': 'fill',
+        'source': 'ITCampus_f2',
+        'layout': {
+            'visibility': 'none'
+        },
+        'paint': {
+			'fill-outline-color': 'rgba(40,40,40,1)',
+            'fill-color': 'rgba(80,80,80,0.2)'
+        },
+        'source-layer': 'Floor2-4f0e42'
+    });
+	
+	map.addLayer({
+        'id': 'ITCampus_f1_Selection',
+        'type': 'fill',
+        'source': 'ITCampus_f1',
+        'layout': {
+            'visibility': 'none'
+        },
+        'paint': {
+			'fill-outline-color': 'rgba(54,0,0,2.5)',
+            'fill-color': 'rgba(255,0,0,0.55)'
+        },
+        'source-layer': 'Floor1-8dqbwx'
+    });
+	
+	map.addLayer({
+        'id': 'ITCampus_f1_All',
+        'type': 'fill',
+        'source': 'ITCampus_f1',
+        'layout': {
+            'visibility': 'none'
+        },
+        'paint': {
+			'fill-outline-color': 'rgba(40,40,40,1)',
+            'fill-color': 'rgba(80,80,80,0.2)'
+        },
+        'source-layer': 'Floor1-8dqbwx'
+    });
+
+	map.on('click', function(e) {
+		var features = map.queryRenderedFeatures(e.point, {
+			layers: ['ITCampus_f3_All'] // replace this with the name of the layer
+		});
+		if (!features.length) {
+			return;
+		}
+		
+		var feature = features[0];
+		//alert(features[0].properties.Text);
+		var popup = new mapboxgl.Popup({ offset: [0, -15] })
+			.setLngLat(feature.geometry.coordinates[0][0])
+			.setHTML('<h3>' + feature.properties.Text + '</h3><p>' + feature.properties.TARGET_FID + '</p>')
+			//.setLngLat(feature.geometry.coordinates)
+			.addTo(map);
+		});
+	function panToSchool(target) {	
+		map.flyTo({
+			  // These options control the ending camera position: centered at
+			  // the target, at zoom level 9, and north up.
+			  center: target,
+			  zoom: 9,
+			  bearing: 0,
+
+			  // These options control the flight curve, making it move
+			  // slowly and zoom out almost completely before starting
+			  // to pan.
+			  speed: 0.2, // make the flying slow
+			  curve: 1, // change the speed at which it zooms out
+
+			  // This can be any easing function: it takes a number between
+			  // 0 and 1 and returns another number between 0 and 1.
+			  easing: function (t) {
+					return t;
+			  }
+		 });
+	}
+});
+//from here: doesnt seem to work: 
+function getCentroid2(arr) {
+    var twoTimesSignedArea = 0;
+    var cxTimes6SignedArea = 0;
+    var cyTimes6SignedArea = 0;
+
+    var length = arr.length
+
+    var x = function (i) { return arr[i % length][0] };
+    var y = function (i) { return arr[i % length][1] };
+
+    for ( var i = 0; i < arr.length; i++) {
+        var twoSA = x(i)*y(i+1) - x(i+1)*y(i);
+        twoTimesSignedArea += twoSA;
+        cxTimes6SignedArea += (x(i) + x(i+1)) * twoSA;
+        cyTimes6SignedArea += (y(i) + y(i+1)) * twoSA;
+    }
+    var sixSignedArea = 3 * twoTimesSignedArea;
+    return [ cxTimes6SignedArea / sixSignedArea, cyTimes6SignedArea / sixSignedArea];        
+}
+
+
+
+var toggleableLayerIds = [ 'ITCampus_f3_All', 'ITCampus_f2_All', 'ITCampus_f1_All' ];
+
+
+	
+for (var i = 0; i < toggleableLayerIds.length; i++) {
+	var id = toggleableLayerIds[i];
+
+	var link = document.createElement('a');
+	link.href = '#';
+	link.className = ' ';
+	link.textContent = id;
+	
+	if (i == 0){
+		link.className = 'active';
+	}
+
+	link.onclick = function (e) {
+		var clickedLayer = this.textContent;
+		e.preventDefault();
+		e.stopPropagation();
+
+		var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+
+		if (visibility === 'visible') {
+		   alert("already visible");
+		} else {
+			this.className = 'active';
+			map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+			
+			for (var i = 0; i < toggleableLayerIds.length; i++) {
+				if (toggleableLayerIds[i] != clickedLayer) {
+					map.setLayoutProperty(toggleableLayerIds[i], 'visibility', 'none');
+					$('#menu').children('a').each(function() {
+						
+						if(this.text == toggleableLayerIds[i]) {
+							this.className = '';
+						};
+					});
+				};
+			};
+				
+		}
+	};
+
+	var layers = document.getElementById('menu');
+	layers.appendChild(link);
+}
+
+	
+  
+
+
+
+</script>
+<script src="mapcontroller.js"></script>	
+
+</body>
+</html>
+

@@ -1,0 +1,50 @@
+table {
+    border: 1px solid rgb(180, 180, 114);
+}
+
+/* Mobile First */
+
+
+tr .avail {
+    color: #6f1400;
+    font-size: small;
+    text-align: right;
+    padding-right: 5px;
+}
+.schedule {
+    visibility: hidden;
+}
+table a:not(.btn), .table a:not(.btn), table.gridview a:not(.btn), .table.gridview a:not(.btn) {
+    text-decoration: none;
+    color: #0d3625;
+}
+
+a {
+    text-decoration: none;
+}
+
+a :hover {
+    color: #00b3ee;
+}
+
+@media only screen and (min-width: 768px) {
+    /* For desktop phones: */
+    tr .avail {
+        text-align: left;
+        width: 50%
+    }
+
+    tr .room {
+
+        width: 50%
+    }
+
+    .schedule {
+
+        margin-right: 20px;
+        visibility: visible;
+        color: darkgrey;
+        font-size: larger;
+    }
+}
+

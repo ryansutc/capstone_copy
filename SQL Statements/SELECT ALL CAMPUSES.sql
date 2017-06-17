@@ -1,0 +1,1 @@
+SELECT DISTINCT campus FROM nsccSchedule ORDER BY campus ASC;
